@@ -30,14 +30,18 @@ class GetListOfInfectionsTest(unittest.TestCase):
         self.assertIsNone(error)
 
     # Given a valid json the output return values
-    def test_error_valid_json_given(self):
+    def test_output_valid_json_given(self):
         output, error = get_list_of_infections('ICD10.json')
-        self.assertIsNone(error)
+        self.assertEqual(len(output), 304)
 
+    # Given a valid json and a filter the output return values
+    def test_output_and_filter_valid_json_given(self):
+        output, error = get_list_of_infections('ICD10.json', ['salmonella'])
+        self.assertEqual(len(output), 4)
 
+        output, error = get_list_of_infections('ICD10.json', ['salmonella', 'escherichia coli'])
+        self.assertEqual(len(output), 9)
 
-#output, error = get_list_of_infections('ICD10.json', ['escherichia coli'])
-#print(output, error)
 
 if __name__ == "__main__":
     unittest.main()
