@@ -11,8 +11,9 @@ Salida de "get_list_of_infections":
     2. error. Objeto de error si sucede un evento excepcional.
 
 
-Si la funcion recive un json mal formado o la ruta del file no exite, entonces la salida es una tupla
-donde output retorna una lista vacia y error un objeto de la excepcion.
+Si la funcion recive un json mal formado o la ruta del file no existe, la tupla
+de salida retorna un output igual a una lista vacia y objeto error de la excepcion.
+En caso contrario error retorna None
 
 El parametro filter en el input es opcional. Es una lista de palabras ej: ['salmonella', 'escherichia coli']
 
