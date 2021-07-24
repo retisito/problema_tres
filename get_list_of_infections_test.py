@@ -2,19 +2,42 @@ import unittest
 
 from get_list_of_infections import get_list_of_infections
 
-# Tests adapted from `problem-specifications//canonical-data.json`
+
+class GetListOfInfectionsTest(unittest.TestCase):
+    # Given a bad location json the output must be equal cero
+    def test_output_bad_location_json_given(self):
+        output, error = get_list_of_infections('ICD10Yjson')
+        self.assertEqual(len(output), 0)
+
+    # Given a bad location json the error must be "FileNotFoundError"
+    def test_error_bad_location_json_given(self):
+        output, error = get_list_of_infections('ICD10Yjson')    
+        self.assertEqual(error.__class__.__name__, "FileNotFoundError")
+
+    # Given a bad location json the output must be equal cero
+    def test_output_bad_fomated_json_given(self):
+        output, error = get_list_of_infections('ICD10X.json')        
+        self.assertEqual(len(output), 0)
+
+    # Given a bad location json the error must be "FileNotFoundError"
+    def test_error_bad_fomated_json_given(self):
+        output, error = get_list_of_infections('ICD10X.json')
+        self.assertEqual(error.__class__.__name__, "JSONDecodeError")
+
+    # Given a valid json the error must be "None"
+    def test_error_valid_json_given(self):
+        output, error = get_list_of_infections('ICD10.json')
+        self.assertIsNone(error)
+
+    # Given a valid json the output return values
+    def test_error_valid_json_given(self):
+        output, error = get_list_of_infections('ICD10.json')
+        self.assertIsNone(error)
 
 
-class TwoFerTest(unittest.TestCase):
-    def test_no_name_given(self):
-        self.assertEqual(get_list_of_infections(), "One for you, one for me.")
 
-    def test_a_name_given(self):
-        self.assertEqual(get_list_of_infections("Alice"), "One for Alice, one for me.")
-
-    def test_another_name_given(self):
-        self.assertEqual(get_list_of_infections("Bob"), "One for Bob, one for me.")
-
+#output, error = get_list_of_infections('ICD10.json', ['escherichia coli'])
+#print(output, error)
 
 if __name__ == "__main__":
     unittest.main()
